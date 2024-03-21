@@ -30,6 +30,20 @@ class RNNaverLoginModule(reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     @ReactMethod
+    fun Initialize(String, consumerSecret: String, appName: String, promise: Promise){
+        try{
+            NaverIdLoginSDK.initialize(
+                currentActivity!!,
+                consumerKey,
+                consumerSecret,
+                appName,
+            )
+        }catch (je: Exception){
+            onLoginFailure(je.localizedMessage)
+        }
+    }
+
+    @ReactMethod
     fun login(
         consumerKey: String, consumerSecret: String, appName: String, promise: Promise
     ) = UiThreadUtil.runOnUiThread {
